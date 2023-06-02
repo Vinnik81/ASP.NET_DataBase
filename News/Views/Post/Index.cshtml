@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (TempData.ContainsKey("status"))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Notification! </strong> @TempData["status"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="list-group">
+    @foreach (var item in @Model)
+    {
+        <a asp-controller="Post" asp-action="Detail" asp-route-id="@item.Id">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@item.Title</h5>
+                <small>@item.Date</small>
+            </div>
+            <img src="@item.ImageUrl">
+            <p class="mb-1">@Html.Raw(@item.Content)</p>
+        </a>
+    }
+</div>
+
+
+@section Scripts{
+    <script>
+        setTimeout(() => {
+            console.log("Good");
+            $('.alert').hide();
+        }, 5000);
+    </script>
+}

@@ -12,8 +12,8 @@ using News.Models;
 namespace News.Migrations
 {
     [DbContext(typeof(NewsDbContext))]
-    [Migration("20230531132551_InitDb")]
-    partial class InitDb
+    [Migration("20230602174908_inittitititit")]
+    partial class inittitititit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,8 @@ namespace News.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(20000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
@@ -42,11 +44,10 @@ namespace News.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsFavorit")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
