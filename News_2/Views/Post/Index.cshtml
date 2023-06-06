@@ -20,9 +20,16 @@
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">@item.Title</h5>
                 <small>@item.Date</small>
+                <small>Category: @item.Category.Name</small>
             </div>
             <img src="@item.ImageUrl">
             <p class="mb-1">@Html.Raw(@item.Content)</p>
+            <p>
+                # @foreach (PostTag posTag in item?.PostTags)
+                {
+                    <span class="btn btn-primary">@posTag?.Tag?.Name</span>
+                }
+            </p>
         </a>
     }
 </div>
