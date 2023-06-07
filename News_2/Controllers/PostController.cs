@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using News_2.Extensions;
 using News_2.Helpers;
 using News_2.Models;
 using System;
@@ -62,9 +63,16 @@ namespace News_2.Controllers
                 newsDbContext.Posts.Update(post);
                 await newsDbContext.SaveChangesAsync();
 
-               var postTags = newsDbContext.PostTags.Where(x => x.PostId == post.Id);
-                newsDbContext.PostTags.RemoveRange(postTags);
-                newsDbContext.PostTags.AddRange(tags.Select(x => new PostTag { TagId = x, PostId = post.Id }));
+                //var postTags = newsDbContext.PostTags.Where(x => x.PostId == post.Id);
+                // newsDbContext.PostTags.RemoveRange(postTags);
+                // newsDbContext.PostTags.AddRange(tags.Select(x => new PostTag { TagId = x, PostId = post.Id }));
+
+                var postWithTags = newsDbContext.Posts.Include(x => x.PostTags).FirstOrDefault(x => x.Id == post.Id);
+                newsDbContext.UpdateManyToMany(
+                    postWithTags.PostTags,
+                    tags.Select(x => new PostTag { TagId = x, PostId = post.Id }),
+                    x => x.TagId);
+
                 await newsDbContext.SaveChangesAsync();
                 //foreach (var id in tags)
                 //{
