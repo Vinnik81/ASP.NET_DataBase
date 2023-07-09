@@ -43,7 +43,7 @@ namespace Authentication.Controllers
                     {
                         Login = registrationViewModel.Login,
                         PasswordHash = SHA256Encryptor.Encrypt(registrationViewModel.Password),
-                        IsAdmin = false
+                        IsAdmin = registrationViewModel.IsAdmin
                     });
 
                 await usersDbContext.SaveChangesAsync();
@@ -64,7 +64,7 @@ namespace Authentication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (UserManger.Login(loginViewModel.Login, loginViewModel.Password))
+                if (UserManger.Login(loginViewModel.Login, loginViewModel.Password, loginViewModel.IsAdmin))
                     return RedirectToAction("Index", "Home");
             }
 

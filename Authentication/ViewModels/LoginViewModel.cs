@@ -11,5 +11,6 @@ namespace Authentication.ViewModels
         [MinLength(1)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

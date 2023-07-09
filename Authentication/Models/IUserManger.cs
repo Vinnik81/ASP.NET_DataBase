@@ -2,7 +2,7 @@
 {
     public interface IUserManger
     {
-        bool Login(string username, string password);
+        bool Login(string username, string password, bool isAdmin);
         UserCredentials GetUserCredentials();
     }
 }

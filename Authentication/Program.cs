@@ -33,6 +33,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "login",
+    pattern: "/Home/Login",
+    defaults: new { controller = "Home", action = "Login" }
+    );
 
 app.UseMiddleware<KeyMiddleware>();
 app.Run();

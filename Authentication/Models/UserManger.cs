@@ -31,10 +31,10 @@ namespace Authentication.Models
 
         }
 
-        public bool Login(string username, string password)
+        public bool Login(string username, string password, bool isAdmin)
         {
             var passwordHash = SHA256Encryptor.Encrypt(password);
-            var users = usersDbContext.Users.FirstOrDefault(x => x.PasswordHash == passwordHash && x.Login == username);
+            var users = usersDbContext.Users.FirstOrDefault(x => x.PasswordHash == passwordHash && x.Login == username && x.IsAdmin == isAdmin);
             if (users != null)
             {
                 var userCredentials = new UserCredentials

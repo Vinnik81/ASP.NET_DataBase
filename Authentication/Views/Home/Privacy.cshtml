@@ -20,6 +20,10 @@
     <input asp-for="PasswordAgain" class="form-control">
     <span class="text-danger" asp-validation-for="PasswordAgain"></span>
   </div>
+  <div>
+      <label asp-for="IsAdmin">Admin:</label>
+      <input asp-for="IsAdmin" type="checkbox"/>
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
