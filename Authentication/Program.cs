@@ -34,14 +34,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Use(async (context, next) =>
-{
-    if (context.Request.Cookies.Count > 0)
-    {
-        await next.Invoke();
-    }
-});
-
-
-app.UseMiddleware<KeyMiddleware>();
+//app.UseMiddleware<KeyMiddleware>();
 app.Run();
